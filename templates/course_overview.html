@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h3><small class="text-muted">Лекционный материал:</small></h3>
+    <div class="d-flex flex-wrap">
+        {% for i in lectures %}
+        <div class="card mr-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{i.title}}</h5>
+                <form action="/lecture{{i.id}}" method="post">
+                    <input type="hidden" name="course_id" value="{{course_id}}">
+                    <button type="submit" class="btn btn-outline-secondary stretched-link">Подробнее</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <h3><small class="text-muted">Тесты:</small></h3>
+    <div class="d-flex flex-wrap">
+        {% for i in tests %}
+        <div class="card mr-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{i.title}}</h5>
+                <form action="/test{{i.id}}" method="post">
+                    <input type="hidden" name="course_id" value="{{course_id}}">
+                    <button type="submit" class="btn btn-outline-secondary stretched-link">Подробнее</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+    <form action="/add_group_to_course" method="POST">
+        <select name="group_id" class="mb-3 form-select" aria-label="Default select example" required>
+            {% for i in groups %}
+            <option value={{i.id}}>{{i.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="group_id" value="{{group_id}}">
+        <input type="hidden" name="course_id" value="{{course_id}}">
+        <button type="submit" class=" btn btn-info">Добавить группу к курсу</button>
+    </form>
+    <form action="/course_control_panel{{course_id}}" method="get">
+        <div class="mb-3">
+            <button type="submit" class=" mt-4 btn btn-lg btn-primary mb-2">Панель управления курсом</button>
+        </div>
+    </form>
+    <form action="/delete_course{{course_id}}" method="post">
+        <div class="mb-3">
+            <button type="submit" class="btn btn-danger mb-2">УДАЛИТЬ КУРС</button>
+        </div>
+    </form>
+
+    <h2 class="display-4 ">{{message}}</h2>
+</div>
+
+{% endblock %}

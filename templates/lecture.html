@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="display-4 ">{{lecture.title}}</h2>
+    <p class="display-6">Прикрепленный файл: {{lecture.path_to_file}}</p>
+    <hr class="my-4">
+    <form action="/get_lecture{{lecture.id}}" method="post">
+        <button type="submit" class="btn mb-3 btn-warning">Скачать</button>
+    </form>
+    <form action="/course{{course_id}}" method="get">
+        <button type="submit" class="btn btn-info">Назад</button>
+    </form>
+</div>
+{% endblock %}

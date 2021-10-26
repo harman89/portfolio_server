@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="list-group">
+        <h3><small class="text-muted">Текущие курсы:</small></h3>
+        {% for i in course_list %}
+        <form action="/course{{i.id}}" method="get">
+            <button type="submit" class="btn btn-outline-secondary mb-3 list-group-item list-group-item-action">
+                {{i.title}}
+            </button>
+        </form>
+        {% endfor %}
+    </div>
+    <form action="/add_course" method="post">
+        <div class="mb-3">
+            <input type="text" class="form-control btn-lg" name="title" placeholder="Название курса"
+                   required>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-lg btn-primary mb-2">Добавить новый курс</button>
+        </div>
+    </form>
+    <h2 class="display-4 ">{{message}}</h2>
+</div>
+{% endblock %}

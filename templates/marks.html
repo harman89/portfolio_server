@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<figure class = "text-center">
+<h1>{{groupname}}</h1>
+</figure>
+{% for i in courses %}
+<div class = "table-responsive">
+    <table class = "table table-bordered">
+        <h4>{{i.title}}</h4>
+        <tbody>
+            {% for j in range(students|length) %}
+                <tr>
+                    <td class="table-active">{{students[j].name+" "+students[j].surname}}</td>
+                    {% for r in results %}
+                    {% if students[j].id == r.user_id %}
+                    <td data-toggle="popover" title="Сведения о результате" data-html = "true" data-content="Тест - {{r.theme}} <br> Раздел - {{r.part_theme}}<br> Дата последней попытки - {{r.date}} <br> Число попыток - {{r.tries}}">{{r.mark}}</td>
+                    {% endif %}
+                    {% endfor %}
+                    <td class="table-success" data-toggle="popover" title="Средний балл" data-html = "true" data-content="Выполнено {{averages[j].done}} из {{averages[j].out_of}} заданий">{{averages[j].average}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endfor %}
+<script>
+    $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();
+    });
+    </script>
+{% endblock %}

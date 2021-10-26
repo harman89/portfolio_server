@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <form action="/send_notification" method="post">
+        <select name="group_id" class="mb-3 form-select" aria-label="Default select example" required>
+            {% for i in groups_list %}
+            <option value={{i.id}}>{{i.name}}</option>
+            {% endfor %}
+        </select>
+        <div class="mb-3">
+            <input type="text" class="form-control btn-lg" name="notification_text" placeholder="Текст уведомления"
+                   required>
+        </div>
+        <input type="hidden" name="group_id" value="{{group_id}}">
+        <button type="submit" class="btn btn-info">Послать уведомление для группы</button>
+    </form>
+    <table class="mt-2 table">
+        <thead>
+        <tr>
+            <th scope="col">Группа</th>
+            <th scope="col">Уведомление</th>
+            <th scope="col">Дата</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for j in notifications %}
+        {% for k in j %}
+        <tr>
+            {% set ns = namespace(name="") %}
+            {%for i in groups_list %}
+            {% if i.id == k.group_id %}
+            {%set ns.name = i.name %}
+            {% endif %}
+            {% endfor %}
+            <td>{{ns.name}}</td>
+            <th>{{k.text}}</th>
+            <th>{{k.date}}</th>   
+        </tr>
+        {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

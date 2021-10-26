@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div id="accordion">
+    <div class="card">
+        <div class="card-header" id="questionAddCard">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                    Редактировать вопрос
+                </button>
+            </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+                <form action="/edit_question_submit" method="post">
+                    <br>
+                    <div class="mb-3">
+                        <input type="text" class="mb-4 btn-lg form-control" name="question_title" id="questionInput"
+                               placeholder="Вопрос" required value="{{question.title}}">
+                    </div>
+                    {% for i in answers %}
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="answer{{i.id}}"
+                               placeholder="Вариант ответа 1" value = "{{i.text}}" required>
+                        {% if i.isTrue == 1%}
+                        <input type ="radio" class = "form-control" name ="radio" value="radio{{i.id}}" checked>
+                        {% else %}
+                        <input type ="radio" class = "form-control" name ="radio" value="radio{{i.id}}">
+                        {% endif%}
+                    </div>
+                    {% endfor %}
+                    <input type="hidden" name="question_id" value="{{question.id}}">
+                    <input type="hidden" name="test_id" value="{{test_id}}">
+                    <input type="hidden" name="part_id" value="{{part_id}}">
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary mb-2">Изменить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

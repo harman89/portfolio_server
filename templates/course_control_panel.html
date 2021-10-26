@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="lectureAddCard">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                            aria-controls="collapseOne">
+                        Добавить учебный материал
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+
+                    <form action="/add_lecture" method="POST"
+                          enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="title" placeholder="Заголовок"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="sub_title" placeholder="Подзаголовок"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="file" name="file" required/>
+                        </div>
+                        <input type="hidden" name="course_id" value="{{course_id}}">
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary mb-2">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="testAddCard">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                        Добавить тест
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <form action="/add_test" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="title"
+                                   placeholder="Название теста" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="date" class="form-control" name="close_date" placeholder="Дата закрытия теста"
+                                   required>
+                        </div>
+                        <input type="hidden" name="course_id" value="{{course_id}}">
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary mb-2">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="partAddCard">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree">
+                        Добавить часть(раздел) теста
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    <form action="/add_part" method="post">
+                        <select name="test_id" class="mb-3 form-select" aria-label="Default select example" required>
+                            {% for i in tests %}
+                            <option value={{i.id}}>{{i.title}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="title"
+                                   placeholder="Заголовок части" required>
+                        </div>
+                        <input type="hidden" name="test_id" value="{{test_id}}">
+                        <input type="hidden" name="course_id" value="{{course_id}}">
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary mb-2">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="display-4 ">{{message}}</h2>
+</div>
+
+<script>
+
+    function addInput() {
+        if (x < 10) {
+            var str = '<input type="text" class="link" placeholder="Ссылка на профиль *"> <input type="text" class="amount" placeholder="Кол-во"> <div id="input' + (x + 1) + '"></div>';
+            document.getElementById('input' + x).innerHTML = str;
+            x++;
+        } else {
+            alert('STOP it!');
+        }
+    }
+
+
+
+
+
+
+
+
+</script>
+
+{% endblock %}

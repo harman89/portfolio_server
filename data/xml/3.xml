@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<test theme="Чак борис"><part number="1" part_id="5"><text>Кот</text><question number="1"><text>к</text><answers><answer isTrue="1"><text>е</text></answer><answer isTrue="0"><text>н</text></answer><answer isTrue="0"><text>г</text></answer></answers></question><question number="2"><text>е</text><answers><answer isTrue="1"><text>к</text></answer><answer isTrue="0"><text>у</text></answer><answer isTrue="0"><text>й</text></answer></answers></question></part></test>

@@ -5,3 +5,16 @@ This part of project make server work. User(Teacher) can register and login to s
 Also he can see results of tests.
 # Used technologies
 Python(Flask, Jinja2, SQLAlchemy-ORM) and html(with usage of bootstrap).
+# Pros
+
+Teacher have actually  worked using this app.
+
+
+# Cons
+CRUTCHES
+
+Not tested under large loads.
+
+Lack of commentaries.
+
+Poor design
